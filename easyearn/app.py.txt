@@ -1,0 +1,40 @@
+from flask import Flask, request, jsonify, render_template
+import sqlite3
+
+app = Flask(__name__)
+
+def db():
+    conn = sqlite3.connect("data.db")
+    return conn
+
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+@app.route("/api/user")
+def user():
+    uid = request.args.get("uid")
+    return jsonify({
+        "balance": 0,
+        "history": [0,1,2,3,2,5]
+    })
+
+@app.route("/api/task", methods=["POST"])
+def task():
+    return {"ok": True}
+
+@app.route("/api/bonus", methods=["POST"])
+def bonus():
+    d = request.json
+    cur = db().cursor()
+    cur.execute("UPDATE users SET balance=balance+? WHERE user_id=?",
+                (d["amount"], d["uid"]))
+    db().commit()
+    return {"ok": True}
+
+@app.route("/api/withdraw", methods=["POST"])
+def withdraw():
+    return {"ok": True}
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=10000)

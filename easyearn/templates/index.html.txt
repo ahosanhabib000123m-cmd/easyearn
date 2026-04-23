@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EasyEarn</title>
+
+<link rel="stylesheet" href="/static/style.css">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<!-- NAV -->
+<div class="nav">
+  <div onclick="show('home')">🏠</div>
+  <div onclick="show('task')">🧩</div>
+  <div onclick="show('spin')">🎮</div>
+  <div onclick="show('wallet')">💰</div>
+</div>
+
+<!-- LOADING -->
+<div id="loading" class="skeleton"></div>
+
+<!-- HOME -->
+<div id="home" class="page">
+  <div class="card">
+    <p>Balance</p>
+    <h1 id="bal">0.00</h1>
+  </div>
+
+  <canvas id="chart"></canvas>
+</div>
+
+<!-- TASK -->
+<div id="task" class="page">
+  <button onclick="doTask()">Complete Task</button>
+</div>
+
+<!-- SPIN -->
+<div id="spin" class="page">
+  <div class="wheel" onclick="spin()">🎯 SPIN</div>
+</div>
+
+<!-- WALLET -->
+<div id="wallet" class="page">
+  <button onclick="withdraw()">Withdraw</button>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

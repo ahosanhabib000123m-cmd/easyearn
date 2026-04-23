@@ -1,0 +1,25 @@
+import telebot
+
+TOKEN = "8759099735:AAHO_FVBoD9wNhQ0FzEo6d3XwuwH-wcKRBA"   # এখানে BotFather থেকে পাওয়া token দিবে
+WEB_APP_URL = "https://your-app-url.onrender.com"  # তোমার website link
+
+bot = telebot.TeleBot(TOKEN)
+
+@bot.message_handler(commands=['start'])
+def start(message):
+    markup = telebot.types.InlineKeyboardMarkup()
+
+    button = telebot.types.InlineKeyboardButton(
+        "🚀 Open EasyEarn",
+        web_app=telebot.types.WebAppInfo(url=WEB_APP_URL)
+    )
+
+    markup.add(button)
+
+    bot.send_message(
+        message.chat.id,
+        "👋 Welcome to EasyEarn!\n\nEarn money by completing tasks 🎯",
+        reply_markup=markup
+    )
+
+bot.polling()
